@@ -14,6 +14,9 @@ Poem builder flowing at your fingertips
 ## Checkpoint 1 ##
 
 ### Sketches and Screenshots ###
+
+Checkpoint 1 - App View, labels are sized to 40pt and starts from top left going left to right, top to bottom.
+
 ![Word River - Checkpoint 1](images/chkpt1_ss.PNG)
 
 ### Current Implemented Features ###
