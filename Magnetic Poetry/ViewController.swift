@@ -21,7 +21,9 @@ class ViewController: UIViewController {
     func placeWords(){
         view.backgroundColor = UIColor.orange
         
-
+        var xPlacement = 80
+        var yPlacement = 50
+        let margin = 35
         
         for word in words{
             let l = UILabel()
@@ -29,8 +31,16 @@ class ViewController: UIViewController {
             l.text = word
             l.font = UIFont(name: "HelveticaNeue", size: 40.0)
             l.sizeToFit()
-            let x = CGFloat(arc4random() % 280) + 20.0
-            let y = CGFloat(arc4random() % 300) + 30.0
+            
+            if l.frame.width + CGFloat(margin) + CGFloat(xPlacement) > view.frame.size.width{
+                xPlacement = 80
+                yPlacement += 50
+            }
+            
+            let x = margin + Int(xPlacement)
+            xPlacement = x + Int(l.frame.width)
+            
+            let y = yPlacement
             l.center = CGPoint(x:x, y:y)
             view.addSubview(l)
             
