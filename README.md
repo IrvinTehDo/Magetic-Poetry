@@ -14,6 +14,7 @@ Poem builder flowing at your fingertips
 ## Checkpoint 1 ##
 
 ### Sketches and Screenshots ###
+![Word River - Checkpoint 1](images/chkpt1_ss.png)
 
 ### Current Implemented Features ###
 
