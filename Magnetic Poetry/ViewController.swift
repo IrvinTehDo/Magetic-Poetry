@@ -20,10 +20,14 @@ class ViewController: UIViewController {
     
     func placeWords(){
         view.backgroundColor = UIColor.orange
+        
+
+        
         for word in words{
             let l = UILabel()
             l.backgroundColor = UIColor.white
             l.text = word
+            l.font = UIFont(name: "HelveticaNeue", size: 40.0)
             l.sizeToFit()
             let x = CGFloat(arc4random() % 280) + 20.0
             let y = CGFloat(arc4random() % 300) + 30.0
