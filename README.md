@@ -22,9 +22,9 @@ Poem builder flowing at your fingertips
 
 2. Words will now be initally placed from top left and placed left to right, top to bottom.
 
-? 3. Start-up Screen Added.
+3. Start-up Screen Added.
 
-? 4. App-Icon Created.
+4. App-Icon Created.
 
 ### Upcoming ###
 
