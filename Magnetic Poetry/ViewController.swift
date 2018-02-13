@@ -1,4 +1,4 @@
-//
+//Irvin Do and Kyle Lekkas
 //  ViewController.swift
 //  Magnetic Poetry
 //
@@ -19,7 +19,8 @@ class ViewController: UIViewController {
     }
     
     func placeWords(){
-        view.backgroundColor = UIColor.orange
+        //same color as start screen
+        view.backgroundColor = UIColor.init(red: 0.168, green: 0.541, blue: 0.560, alpha: 1.0)
         
         var xPlacement = 80
         var yPlacement = 50
@@ -42,7 +43,12 @@ class ViewController: UIViewController {
             
             let y = yPlacement
             l.center = CGPoint(x:x, y:y)
-            view.addSubview(l)
+            
+            //temp constraint to fix iphone placement
+            if (yPlacement <= Int(view.frame.height/3)) {
+                view.addSubview(l)
+            }
+
             
             l.isUserInteractionEnabled = true
             let panGesture = UIPanGestureRecognizer(target: self, action: #selector(doPanGesture))
