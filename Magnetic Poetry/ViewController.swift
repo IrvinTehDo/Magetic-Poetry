@@ -14,72 +14,17 @@ class ViewController: UIViewController {
         return true
     }
     
-    //action
-    @IBAction func loadPressed(_ sender: Any) {
-        removeWords()
-        placeWords()
-    }
-    
-    
-    var words:[(word: String, type: String, isVisible: Bool)] = []
-    
-    
+    //var words: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        //Add words and their types to words array
-        //Types: Article, conjunction, adjective, noun, pronoun, verb
-        words += [(word: " a ", type: "article", isVisible: false)]
-        words += [(word: " a ", type: "article", isVisible: false)]
-        words += [(word: " & ", type: "conjunction", isVisible: false)]
-        words += [(word: " & ", type: "conjunction", isVisible: false)]
-        words += [(word: "about", type: "adjective", isVisible: false)]
-        words += [(word: "above", type: "adjective", isVisible: false)]
-        words += [(word: "ache", type: "noun", isVisible: false)]
-        words += [(word: "ad", type: "noun", isVisible: false)]
-        words += [(word: "am", type: "article", isVisible: false)]
-        words += [(word: "am", type: "article", isVisible: false)]
-        words += [(word: "and", type: "conjunction", isVisible: false)]
-        words += [(word: "and", type: "conjunction", isVisible: false)]
-        words += [(word: "because", type: "conjunction", isVisible: false)]
-        words += [(word: "but", type: "conjunction", isVisible: false)]
-        words += [(word: "for", type: "conjunction", isVisible: false)]
-        words += [(word: "if", type: "conjunction", isVisible: false)]
-        words += [(word: "or", type: "conjunction", isVisible: false)]
-        words += [(word: "he", type: "pronoun", isVisible: false)]
-        words += [(word: "she", type: "pronoun", isVisible: false)]
-        words += [(word: "they", type: "pronoun", isVisible: false)]
-        words += [(word: "I", type: "pronoun", isVisible: false)]
-        words += [(word: "you", type: "pronoun", isVisible: false)]
-        words += [(word: "me", type: "pronoun", isVisible: false)]
-        words += [(word: "them", type: "pronoun", isVisible: false)]
-        words += [(word: "exciting", type: "adjective", isVisible: false)]
-        words += [(word: "green", type: "adjective", isVisible: false)]
-        words += [(word: "tidy", type: "adjective", isVisible: false)]
-        words += [(word: "jump", type: "verb", isVisible: false)]
-        words += [(word: "stop", type: "verb", isVisible: false)]
-        words += [(word: "explore", type: "verb", isVisible: false)]
-        words += [(word: "snow", type: "verb", isVisible: false)]
-        words += [(word: "happen", type: "verb", isVisible: false)]
-        words += [(word: "happen", type: "verb", isVisible: false)]
-        words += [(word: "be", type: "verb", isVisible: false)]
-        words += [(word: "evolve", type: "verb", isVisible: false)]
-        words += [(word: "shrink", type: "verb", isVisible: false)]
-        words += [(word: "widen", type: "verb", isVisible: false)]
-        words += [(word: "man", type: "noun", isVisible: false)]
-        words += [(word: "girl", type: "noun", isVisible: false)]
-        words += [(word: "engine", type: "noun", isVisible: false)]
-        words += [(word: "horse", type: "noun", isVisible: false)]
-        words += [(word: "wall", type: "noun", isVisible: false)]
-        words += [(word: "flower", type: "noun", isVisible: false)]
-        words += [(word: "life", type: "noun", isVisible: false)]
-        words += [(word: "death", type: "noun", isVisible: false)]
-        
-        
-        placeWords()
+
+        //same color as start screen
+        view.backgroundColor = UIColor.init(red: 0.168, green: 0.541, blue: 0.560, alpha: 1.0)
     }
     
+    //Removes every label from view
     func removeWords(){
         for v in view.subviews{
             if (v is UILabel){
@@ -88,66 +33,40 @@ class ViewController: UIViewController {
         }
     }
     
-    func placeWords() {
-        //same color as start screen
-        view.backgroundColor = UIColor.init(red: 0.168, green: 0.541, blue: 0.560, alpha: 1.0)
-        
-        //check to see how many words were placed. if none, its because all have been used, so reset the words.
-        var count = 0
-        
+    //Places and Creates Labels based on an array of words
+    func placeWords(words:[String]) {
         var xPlacement = 80
         var yPlacement = 50
         let margin = 35
         
-        for index in 0 ..< words.count {
+        for word in words{
+            let l = UILabel()
+            l.backgroundColor = UIColor.white
+            l.text = word
+            l.font = UIFont(name: "HelveticaNeue", size: 40.0)
+            l.sizeToFit()
             
-            //Only run code if it has not been seen before
-            if (words[index].isVisible == false) {
-                
-                let label = UILabel()
-                label.backgroundColor = UIColor.white
-                label.text = words[index].word
-                label.font = UIFont(name: "HelveticaNeue", size: 40.0)
-                label.sizeToFit()
-                label.directionalLayoutMargins.bottom = 5
-                label.directionalLayoutMargins.top = 5
-                label.directionalLayoutMargins.leading = 50
-                //label.directionalLayoutMargins.trailing = 50
-                //label.sizeToFit()
-                
-                if (label.frame.width + CGFloat(margin) + CGFloat(xPlacement) > view.frame.size.width) {
-                    xPlacement = 80
-                    yPlacement += 50
-                }
-                
-                let xPos = margin + Int(xPlacement)
-                xPlacement = xPos + Int(label.frame.width)
-                
-                let yPos = yPlacement
-                label.center = CGPoint(x:xPos, y:yPos)
-                
-                //temp constraint to fix iphone placement
-                if (yPlacement <= Int(view.frame.height/3)) {
-                    view.addSubview(label)
-                    //if the word is placed, change its visibility value
-                    words[index].isVisible = true
-                    count += 1
-                }
-                
-                
-                label.isUserInteractionEnabled = true
-                let panGesture = UIPanGestureRecognizer(target: self, action: #selector(doPanGesture))
-                label.addGestureRecognizer(panGesture)
-                
+            if l.frame.width + CGFloat(margin) + CGFloat(xPlacement) > view.frame.size.width{
+                xPlacement = 80
+                yPlacement += 50
             }
-
+            
+            let x = margin + Int(xPlacement)
+            xPlacement = x + Int(l.frame.width)
+            
+            let y = yPlacement
+            l.center = CGPoint(x:x, y:y)
+            
+            //temp constraint to fix iphone placement
+            if (yPlacement <= Int(view.frame.height/3)) {
+                view.addSubview(l)
+            }
+            
+            
+            l.isUserInteractionEnabled = true
+            let panGesture = UIPanGestureRecognizer(target: self, action: #selector(doPanGesture))
+            l.addGestureRecognizer(panGesture)
         }
-        
-        //no words drawn, reset word visibility and redraw
-        if (count == 0) {
-            resetWords()
-        }
-        
     }
     
     @objc func doPanGesture(panGesture:UIPanGestureRecognizer) {
@@ -155,14 +74,24 @@ class ViewController: UIViewController {
         let position = panGesture.location(in: view)
         label.center = position
     }
+
     
-    func resetWords() {
-        for index in 0 ..< words.count  {
-            words[index].isVisible = false
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showWordSegue"{
+            let wordSetVC = segue.destination.childViewControllers[0] as! WordSetVC
+            //wordsVC.words = ["a", "b", "c"]
+            wordSetVC.title = "Choose a Word List"
         }
-        placeWords()
     }
 
-
+    @IBAction func unwindToMain(segue: UIStoryboardSegue) {
+        if (segue.identifier == "DoneTapped"){
+            let wordSetVC = segue.source as! WordSetVC
+            let wordSet = wordSetVC.selectedWordSet
+            removeWords()
+            placeWords(words: wordSet!)
+        }
+    }
+    
 }
 

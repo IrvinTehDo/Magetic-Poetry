@@ -12,6 +12,7 @@
 		3F5A4B5020212BCC00DB517F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F5A4B4E20212BCC00DB517F /* Main.storyboard */; };
 		3F5A4B5220212BCC00DB517F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F5A4B5120212BCC00DB517F /* Assets.xcassets */; };
 		3F5A4B5520212BCC00DB517F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F5A4B5320212BCC00DB517F /* LaunchScreen.storyboard */; };
+		77610A81203BCE270050D768 /* WordSetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77610A80203BCE270050D768 /* WordSetVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		3F5A4B5120212BCC00DB517F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3F5A4B5420212BCC00DB517F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3F5A4B5620212BCC00DB517F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		77610A80203BCE270050D768 /* WordSetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordSetVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +59,7 @@
 				3F5A4B4A20212BCC00DB517F /* AppDelegate.swift */,
 				3F5A4B4C20212BCC00DB517F /* ViewController.swift */,
 				3F5A4B4E20212BCC00DB517F /* Main.storyboard */,
+				77610A80203BCE270050D768 /* WordSetVC.swift */,
 				3F5A4B5120212BCC00DB517F /* Assets.xcassets */,
 				3F5A4B5320212BCC00DB517F /* LaunchScreen.storyboard */,
 				3F5A4B5620212BCC00DB517F /* Info.plist */,
@@ -138,6 +141,7 @@
 			files = (
 				3F5A4B4D20212BCC00DB517F /* ViewController.swift in Sources */,
 				3F5A4B4B20212BCC00DB517F /* AppDelegate.swift in Sources */,
+				77610A81203BCE270050D768 /* WordSetVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
