@@ -10,7 +10,13 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+    
     var words:[(word: String, type: String, isVisible: Bool)] = []
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
