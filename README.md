@@ -33,7 +33,7 @@ Checkpoint 1 - App View, labels are sized to 40pt and starts from top left going
 
 ### Sketches and Screenshots ###
 
-![Word River - Checkpoint 2 Picture 1](images/chkpt2_ss1PNG)
+![Word River - Checkpoint 2 Picture 1](images/chkpt2_ss1.PNG)
 ![Word River - Checkpoint 2 Picture 2](images/chkpt2_ss2.PNG)
 
 ### Current Implemented Features ###
