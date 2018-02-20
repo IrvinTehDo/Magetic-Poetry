@@ -15,7 +15,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3F5A4B4720212BCC00DB517F /* Magnetic Poetry.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Magnetic Poetry.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3F5A4B4720212BCC00DB517F /* Word River.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Word River.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F5A4B4A20212BCC00DB517F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3F5A4B4C20212BCC00DB517F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		3F5A4B4F20212BCC00DB517F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -46,7 +46,7 @@
 		3F5A4B4820212BCC00DB517F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3F5A4B4720212BCC00DB517F /* Magnetic Poetry.app */,
+				3F5A4B4720212BCC00DB517F /* Word River.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -67,9 +67,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		3F5A4B4620212BCC00DB517F /* Magnetic Poetry */ = {
+		3F5A4B4620212BCC00DB517F /* Word River */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3F5A4B5920212BCC00DB517F /* Build configuration list for PBXNativeTarget "Magnetic Poetry" */;
+			buildConfigurationList = 3F5A4B5920212BCC00DB517F /* Build configuration list for PBXNativeTarget "Word River" */;
 			buildPhases = (
 				3F5A4B4320212BCC00DB517F /* Sources */,
 				3F5A4B4420212BCC00DB517F /* Frameworks */,
@@ -79,9 +79,9 @@
 			);
 			dependencies = (
 			);
-			name = "Magnetic Poetry";
+			name = "Word River";
 			productName = "Magnetic Poetry";
-			productReference = 3F5A4B4720212BCC00DB517F /* Magnetic Poetry.app */;
+			productReference = 3F5A4B4720212BCC00DB517F /* Word River.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -113,7 +113,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				3F5A4B4620212BCC00DB517F /* Magnetic Poetry */,
+				3F5A4B4620212BCC00DB517F /* Word River */,
 			);
 		};
 /* End PBXProject section */
@@ -312,7 +312,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3F5A4B5920212BCC00DB517F /* Build configuration list for PBXNativeTarget "Magnetic Poetry" */ = {
+		3F5A4B5920212BCC00DB517F /* Build configuration list for PBXNativeTarget "Word River" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3F5A4B5A20212BCC00DB517F /* Debug */,
