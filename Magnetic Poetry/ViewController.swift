@@ -14,6 +14,13 @@ class ViewController: UIViewController {
         return true
     }
     
+    //action
+    @IBAction func loadPressed(_ sender: Any) {
+        removeWords()
+        placeWords()
+    }
+    
+    
     var words:[(word: String, type: String, isVisible: Bool)] = []
     
     
@@ -23,10 +30,10 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         //Add words and their types to words array
         //Types: Article, conjunction, adjective, noun, pronoun, verb
-        words += [(word: "a", type: "article", isVisible: false)]
-        words += [(word: "a", type: "article", isVisible: false)]
-        words += [(word: "&", type: "conjunction", isVisible: false)]
-        words += [(word: "&", type: "conjunction", isVisible: false)]
+        words += [(word: " a ", type: "article", isVisible: false)]
+        words += [(word: " a ", type: "article", isVisible: false)]
+        words += [(word: " & ", type: "conjunction", isVisible: false)]
+        words += [(word: " & ", type: "conjunction", isVisible: false)]
         words += [(word: "about", type: "adjective", isVisible: false)]
         words += [(word: "above", type: "adjective", isVisible: false)]
         words += [(word: "ache", type: "noun", isVisible: false)]
@@ -62,7 +69,7 @@ class ViewController: UIViewController {
         words += [(word: "widen", type: "verb", isVisible: false)]
         words += [(word: "man", type: "noun", isVisible: false)]
         words += [(word: "girl", type: "noun", isVisible: false)]
-        words += [(word: "engineer", type: "noun", isVisible: false)]
+        words += [(word: "engine", type: "noun", isVisible: false)]
         words += [(word: "horse", type: "noun", isVisible: false)]
         words += [(word: "wall", type: "noun", isVisible: false)]
         words += [(word: "flower", type: "noun", isVisible: false)]
@@ -85,49 +92,75 @@ class ViewController: UIViewController {
         //same color as start screen
         view.backgroundColor = UIColor.init(red: 0.168, green: 0.541, blue: 0.560, alpha: 1.0)
         
+        //check to see how many words were placed. if none, its because all have been used, so reset the words.
+        var count = 0
+        
         var xPlacement = 80
         var yPlacement = 50
         let margin = 35
         
-        for word in words {
-            let label = UILabel()
-            label.backgroundColor = UIColor.white
-            label.text = word.word
-            label.font = UIFont(name: "HelveticaNeue", size: 40.0)
-            label.sizeToFit()
-            label.directionalLayoutMargins.bottom = 5
-            label.directionalLayoutMargins.top = 5
-            label.directionalLayoutMargins.leading = 50
-            //label.directionalLayoutMargins.trailing = 50
-            //label.sizeToFit()
+        for index in 0 ..< words.count {
             
-            if (label.frame.width + CGFloat(margin) + CGFloat(xPlacement) > view.frame.size.width) {
-                xPlacement = 80
-                yPlacement += 50
-            }
-            
-            let xPos = margin + Int(xPlacement)
-            xPlacement = xPos + Int(label.frame.width)
-            
-            let yPos = yPlacement
-            label.center = CGPoint(x:xPos, y:yPos)
-            
-            //temp constraint to fix iphone placement
-            if (yPlacement <= Int(view.frame.height/3)) {
-                view.addSubview(label)
+            //Only run code if it has not been seen before
+            if (words[index].isVisible == false) {
+                
+                let label = UILabel()
+                label.backgroundColor = UIColor.white
+                label.text = words[index].word
+                label.font = UIFont(name: "HelveticaNeue", size: 40.0)
+                label.sizeToFit()
+                label.directionalLayoutMargins.bottom = 5
+                label.directionalLayoutMargins.top = 5
+                label.directionalLayoutMargins.leading = 50
+                //label.directionalLayoutMargins.trailing = 50
+                //label.sizeToFit()
+                
+                if (label.frame.width + CGFloat(margin) + CGFloat(xPlacement) > view.frame.size.width) {
+                    xPlacement = 80
+                    yPlacement += 50
+                }
+                
+                let xPos = margin + Int(xPlacement)
+                xPlacement = xPos + Int(label.frame.width)
+                
+                let yPos = yPlacement
+                label.center = CGPoint(x:xPos, y:yPos)
+                
+                //temp constraint to fix iphone placement
+                if (yPlacement <= Int(view.frame.height/3)) {
+                    view.addSubview(label)
+                    //if the word is placed, change its visibility value
+                    words[index].isVisible = true
+                    count += 1
+                }
+                
+                
+                label.isUserInteractionEnabled = true
+                let panGesture = UIPanGestureRecognizer(target: self, action: #selector(doPanGesture))
+                label.addGestureRecognizer(panGesture)
+                
             }
 
-            
-            label.isUserInteractionEnabled = true
-            let panGesture = UIPanGestureRecognizer(target: self, action: #selector(doPanGesture))
-            label.addGestureRecognizer(panGesture)
         }
+        
+        //no words drawn, reset word visibility and redraw
+        if (count == 0) {
+            resetWords()
+        }
+        
     }
     
     @objc func doPanGesture(panGesture:UIPanGestureRecognizer) {
         let label = panGesture.view as! UILabel
         let position = panGesture.location(in: view)
         label.center = position
+    }
+    
+    func resetWords() {
+        for index in 0 ..< words.count  {
+            words[index].isVisible = false
+        }
+        placeWords()
     }
 
 
