@@ -1,9 +1,9 @@
-//
+// By Irvin Do and Kyle Lekkas
 //  AppDelegate.swift
 //  Magnetic Poetry
 //
 //  Created by Student on 1/30/18.
-//  Copyright © 2018 Irvin Do. All rights reserved.
+//  Copyright © 2018 Irvin Do and Kyle Lekkas. All rights reserved.
 //
 
 import UIKit

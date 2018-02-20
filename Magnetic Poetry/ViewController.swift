@@ -1,9 +1,9 @@
-//Irvin Do and Kyle Lekkas
+// By Irvin Do and Kyle Lekkas
 //  ViewController.swift
 //  Magnetic Poetry
 //
 //  Created by Irvin Do on 1/30/18.
-//  Copyright © 2018 Irvin Do. All rights reserved.
+//  Copyright © 2018 Irvin Do and Kyle Lekkas. All rights reserved.
 //
 
 import UIKit
@@ -18,7 +18,7 @@ class ViewController: UIViewController {
         placeWords()
     }
     
-    func placeWords(){
+    func placeWords() {
         //same color as start screen
         view.backgroundColor = UIColor.init(red: 0.168, green: 0.541, blue: 0.560, alpha: 1.0)
         
@@ -26,37 +26,37 @@ class ViewController: UIViewController {
         var yPlacement = 50
         let margin = 35
         
-        for word in words{
-            let l = UILabel()
-            l.backgroundColor = UIColor.white
-            l.text = word
-            l.font = UIFont(name: "HelveticaNeue", size: 40.0)
-            l.sizeToFit()
+        for word in words {
+            let label = UILabel()
+            label.backgroundColor = UIColor.white
+            label.text = word
+            label.font = UIFont(name: "HelveticaNeue", size: 40.0)
+            label.sizeToFit()
             
-            if l.frame.width + CGFloat(margin) + CGFloat(xPlacement) > view.frame.size.width{
+            if (label.frame.width + CGFloat(margin) + CGFloat(xPlacement) > view.frame.size.width) {
                 xPlacement = 80
                 yPlacement += 50
             }
             
-            let x = margin + Int(xPlacement)
-            xPlacement = x + Int(l.frame.width)
+            let xPos = margin + Int(xPlacement)
+            xPlacement = xPos + Int(label.frame.width)
             
-            let y = yPlacement
-            l.center = CGPoint(x:x, y:y)
+            let yPos = yPlacement
+            label.center = CGPoint(x:xPos, y:yPos)
             
             //temp constraint to fix iphone placement
             if (yPlacement <= Int(view.frame.height/3)) {
-                view.addSubview(l)
+                view.addSubview(label)
             }
 
             
-            l.isUserInteractionEnabled = true
+            label.isUserInteractionEnabled = true
             let panGesture = UIPanGestureRecognizer(target: self, action: #selector(doPanGesture))
-            l.addGestureRecognizer(panGesture)
+            label.addGestureRecognizer(panGesture)
         }
     }
     
-    @objc func doPanGesture(panGesture:UIPanGestureRecognizer){
+    @objc func doPanGesture(panGesture:UIPanGestureRecognizer) {
         let label = panGesture.view as! UILabel
         let position = panGesture.location(in: view)
         label.center = position
