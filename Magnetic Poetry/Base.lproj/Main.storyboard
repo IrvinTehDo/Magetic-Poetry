@@ -76,7 +76,7 @@
                                 <action selector="cancelTapped:" destination="DrY-hF-3KV" id="cuN-8k-1kJ"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="Wee-Tn-reZ">
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="Wee-Tn-reZ">
                             <connections>
                                 <action selector="unwindToMain:" destination="dGH-9U-I1b" id="Jh0-he-lpd"/>
                                 <segue destination="dGH-9U-I1b" kind="unwind" identifier="DoneTapped" unwindAction="unwindToMainWithSegue:" id="cVI-P7-eZM"/>

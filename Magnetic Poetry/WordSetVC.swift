@@ -27,7 +27,7 @@ class WordSetVC: UITableViewController {
         wordSets.append((name: "Default", value: defaultWords))
         wordSets.append((name: "Pirates", value: pirateWords))
         wordSets.append((name: "Space", value: spaceWords))
-        
+
         selectedWordSet = wordSets[0].value
     }
     

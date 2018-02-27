@@ -14,21 +14,21 @@ class ViewController: UIViewController {
         return true
     }
     
-    //var words: [String] = []
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-
+        
+        placeWords(words: [" a ", " a ", " & " , " & ", "about", "above", "ache", "am", "am", "and", "and", "because", "but", "for", "if", "he", "or", "he", "she", "they", " I ", "you", "me", "them", "exciting", "green", "tidy", "jump", "stop", "explore", "snow", "happen", "happen", "be", "evolve", "shrink", "widen", "man", "girl",   "engine", "horse", "wall", "flower", "life", "death"])
+        
         //same color as start screen
         view.backgroundColor = UIColor.init(red: 0.168, green: 0.541, blue: 0.560, alpha: 1.0)
     }
     
     //Removes every label from view
     func removeWords(){
-        for v in view.subviews{
-            if (v is UILabel){
-                v.removeFromSuperview()
+        for view in view.subviews{
+            if (view is UILabel){
+                view.removeFromSuperview()
             }
         }
     }
@@ -40,32 +40,32 @@ class ViewController: UIViewController {
         let margin = 35
         
         for word in words{
-            let l = UILabel()
-            l.backgroundColor = UIColor.white
-            l.text = word
-            l.font = UIFont(name: "HelveticaNeue", size: 40.0)
-            l.sizeToFit()
+            let label = UILabel()
+            label.backgroundColor = UIColor.white
+            label.text = word
+            label.font = UIFont(name: "HelveticaNeue", size: 40.0)
+            label.sizeToFit()
             
-            if l.frame.width + CGFloat(margin) + CGFloat(xPlacement) > view.frame.size.width{
+            if label.frame.width + CGFloat(margin) + CGFloat(xPlacement) > view.frame.size.width{
                 xPlacement = 80
                 yPlacement += 50
             }
             
             let x = margin + Int(xPlacement)
-            xPlacement = x + Int(l.frame.width)
+            xPlacement = x + Int(label.frame.width)
             
             let y = yPlacement
-            l.center = CGPoint(x:x, y:y)
+            label.center = CGPoint(x:x, y:y)
             
             //temp constraint to fix iphone placement
-            if (yPlacement <= Int(view.frame.height/3)) {
-                view.addSubview(l)
+            if ( yPlacement <= Int ( view.frame.height / 3 ) ) {
+                view.addSubview(label)
             }
             
             
-            l.isUserInteractionEnabled = true
+            label.isUserInteractionEnabled = true
             let panGesture = UIPanGestureRecognizer(target: self, action: #selector(doPanGesture))
-            l.addGestureRecognizer(panGesture)
+            label.addGestureRecognizer(panGesture)
         }
     }
     
@@ -79,7 +79,6 @@ class ViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showWordSegue"{
             let wordSetVC = segue.destination.childViewControllers[0] as! WordSetVC
-            //wordsVC.words = ["a", "b", "c"]
             wordSetVC.title = "Choose a Word List"
         }
     }
