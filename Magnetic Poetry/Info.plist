@@ -4,6 +4,8 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Can Word River create a photo?</string>
 	<key>CFBundleDisplayName</key>
 	<string>Word River</string>
 	<key>CFBundleExecutable</key>

@@ -12,6 +12,7 @@
 		3F5A4B5020212BCC00DB517F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F5A4B4E20212BCC00DB517F /* Main.storyboard */; };
 		3F5A4B5220212BCC00DB517F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F5A4B5120212BCC00DB517F /* Assets.xcassets */; };
 		3F5A4B5520212BCC00DB517F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F5A4B5320212BCC00DB517F /* LaunchScreen.storyboard */; };
+		3FAB6CCF204CE4C2003D5639 /* UIView+takeSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAB6CCE204CE4C2003D5639 /* UIView+takeSnapshot.swift */; };
 		77610A81203BCE270050D768 /* WordSetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77610A80203BCE270050D768 /* WordSetVC.swift */; };
 /* End PBXBuildFile section */
 
@@ -23,6 +24,7 @@
 		3F5A4B5120212BCC00DB517F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3F5A4B5420212BCC00DB517F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3F5A4B5620212BCC00DB517F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3FAB6CCE204CE4C2003D5639 /* UIView+takeSnapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+takeSnapshot.swift"; sourceTree = "<group>"; };
 		77610A80203BCE270050D768 /* WordSetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordSetVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -56,6 +58,7 @@
 		3F5A4B4920212BCC00DB517F /* Magnetic Poetry */ = {
 			isa = PBXGroup;
 			children = (
+				3FAB6CCD204CE4A2003D5639 /* Extensions */,
 				3F5A4B4A20212BCC00DB517F /* AppDelegate.swift */,
 				3F5A4B4C20212BCC00DB517F /* ViewController.swift */,
 				3F5A4B4E20212BCC00DB517F /* Main.storyboard */,
@@ -65,6 +68,14 @@
 				3F5A4B5620212BCC00DB517F /* Info.plist */,
 			);
 			path = "Magnetic Poetry";
+			sourceTree = "<group>";
+		};
+		3FAB6CCD204CE4A2003D5639 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				3FAB6CCE204CE4C2003D5639 /* UIView+takeSnapshot.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -140,6 +151,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F5A4B4D20212BCC00DB517F /* ViewController.swift in Sources */,
+				3FAB6CCF204CE4C2003D5639 /* UIView+takeSnapshot.swift in Sources */,
 				3F5A4B4B20212BCC00DB517F /* AppDelegate.swift in Sources */,
 				77610A81203BCE270050D768 /* WordSetVC.swift in Sources */,
 			);

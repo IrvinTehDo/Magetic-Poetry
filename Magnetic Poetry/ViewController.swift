@@ -8,7 +8,9 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    var backgroundImage:UIImage?
     
     override var prefersStatusBarHidden: Bool {
         return true
@@ -24,6 +26,8 @@ class ViewController: UIViewController {
         view.backgroundColor = UIColor.init(red: 0.168, green: 0.541, blue: 0.560, alpha: 1.0)
     }
     
+
+    
     //Removes every label from view
     func removeWords(){
         for view in view.subviews{
@@ -37,18 +41,34 @@ class ViewController: UIViewController {
     func placeWords(words:[String]) {
         var xPlacement = 80
         var yPlacement = 50
+        var yBuffer = 50
         let margin = 35
         
+        //Determine font size based on device being used
+        //Also adjust yPlacement
+        //Default - phone and others
+        var fontSize:CGFloat = 40
+        
+        //If they're using an ipad
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            fontSize = 65
+        }
+        //If they're using a tv...
+        else if UIDevice.current.userInterfaceIdiom == .tv {
+            fontSize = 200
+        }
+        //yBuffer will space the words vertically to compensate for large fontSize
+        yBuffer = Int(fontSize) + 20
         for word in words{
             let label = UILabel()
             label.backgroundColor = UIColor.white
             label.text = word
-            label.font = UIFont(name: "HelveticaNeue", size: 40.0)
+            label.font = UIFont(name: "HelveticaNeue", size: fontSize)
             label.sizeToFit()
             
-            if label.frame.width + CGFloat(margin) + CGFloat(xPlacement) > view.frame.size.width{
+            if label.frame.width + CGFloat(margin) + CGFloat(xPlacement) > view.frame.size.width {
                 xPlacement = 80
-                yPlacement += 50
+                yPlacement += yBuffer
             }
             
             let x = margin + Int(xPlacement)
@@ -73,6 +93,7 @@ class ViewController: UIViewController {
         let label = panGesture.view as! UILabel
         let position = panGesture.location(in: view)
         label.center = position
+        
     }
 
     
@@ -91,6 +112,51 @@ class ViewController: UIViewController {
             placeWords(words: wordSet!)
         }
     }
+    
+    //Action
+    //Share screenshot of screen
+    @IBAction func sharePressed(_ sender: Any) {
+        let image = self.view.takeSnapshot()
+        let textToShare = "Check out this awesome poem I made with Word River!"
+        let linkToCode = NSURL(string: "https://github.com/IrvinTehDo/Magetic-Poetry")
+        let objectsToShare:[AnyObject] = [textToShare as AnyObject, linkToCode!, image!]
+        let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+        activityVC.excludedActivityTypes = [UIActivityType.print]
+        
+        //For iPad
+        let popoverMenyViewController = activityVC.popoverPresentationController
+        popoverMenyViewController?.permittedArrowDirections = .any
+        popoverMenyViewController?.barButtonItem = sender as? UIBarButtonItem
+        
+        self.present(activityVC, animated: true, completion: nil)
+    }
+    
+    //Load new background from photos
+    @IBAction func loadPressed(_ sender: AnyObject) {
+        let imagePickerController = UIImagePickerController()
+//        if UIImagePickerController.isSourceTypeAvailable(.camera){
+//            imagePickerController.sourceType = .camera
+//        } else {
+//            imagePickerController.sourceType = .savedPhotosAlbum
+//        }
+        imagePickerController.delegate = self
+        imagePickerController.allowsEditing = true
+        self.present(imagePickerController, animated: true, completion: nil)
+    }
+    
+    //MARK: - UIIMagePickerController Delgate Methods -
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        let image:UIImage = info[UIImagePickerControllerEditedImage] as! UIImage
+        backgroundImage = image
+        (self.view as! UIImageView).contentMode = .center
+        (self.view as! UIImageView).image = backgroundImage
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
     
 }
 

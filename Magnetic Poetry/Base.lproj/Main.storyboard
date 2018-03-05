@@ -14,13 +14,23 @@
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Word_River" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" customClass="UIImageView">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vYj-Ez-vP5">
                                 <rect key="frame" x="0.0" y="579" width="375" height="44"/>
                                 <items>
+                                    <barButtonItem systemItem="action" id="I8e-RH-D5K">
+                                        <connections>
+                                            <action selector="sharePressed:" destination="BYZ-38-t0r" id="Esw-EL-aed"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem title="Load" id="UzS-wE-BBa">
+                                        <connections>
+                                            <action selector="loadPressed:" destination="BYZ-38-t0r" id="14b-vO-ETe"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="ysX-AB-LwG"/>
                                     <barButtonItem title="Choose a Word Set" id="Nv2-X6-SmO">
                                         <connections>
