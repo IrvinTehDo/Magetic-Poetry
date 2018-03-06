@@ -33,10 +33,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         NotificationCenter.default.removeObserver(self)
     }
     
-    @objc func applicationWillResignActive(_ application: UIApplication){
-        wordSetBrain.updateLabelPosistions(labels: findLabels())
-    }
-    
+    // Finds all labels and returns them as a UILabel array
     func findLabels() -> [UILabel] {
         var labels = [UILabel]()
         
@@ -60,59 +57,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
     }
     
-    //Places and Creates Labels based on an array of words
-    func placeWords(words:[UserSetData] ) {
-        
-        //Determine font size based on device being used
-        //Also adjust yPlacement
-        //Default - phone and others
-        var fontSize:CGFloat = 40
-        
-        //If they're using an ipad
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            fontSize = 65
-        }
-            //If they're using a tv...
-        else if UIDevice.current.userInterfaceIdiom == .tv {
-            fontSize = 200
-        }
-        
-        for word in words{
-            let label = UILabel()
-            label.backgroundColor = UIColor.white
-            label.text = word.text
-            label.font = UIFont(name: "HelveticaNeue", size: fontSize)
-            label.sizeToFit()
-            
-            label.center.x = CGFloat(word.centerX!)
-            label.center.y = CGFloat(word.centerY!)
-
-            //temp constraint to fix iphone placement
-            view.addSubview(label)
-            
-            label.isUserInteractionEnabled = true
-            let panGesture = UIPanGestureRecognizer(target: self, action: #selector(doPanGesture))
-            label.addGestureRecognizer(panGesture)
-        }
-    }
-    
-    
-    
-    @objc func doPanGesture(panGesture:UIPanGestureRecognizer) {
-        let label = panGesture.view as! UILabel
-        let position = panGesture.location(in: view)
-        label.center = position
-        
-    }
-
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showWordSegue"{
-            let wordSetVC = segue.destination.childViewControllers[0] as! WordSetVC
-            wordSetVC.title = "Choose a Word List"
-        }
-    }
-    
+    // Creates labels with text so they are properly sized then stores them so we can place them later.
     func setAndAppend(wordSet: [String]) -> [UserSetData] {
         var tempUserSet: [UserSetData] = []
         
@@ -160,6 +105,57 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
         
         return tempUserSet
+    }
+    
+    //Places and Creates Labels based on an array of words
+    func placeWords(words:[UserSetData] ) {
+        
+        //Determine font size based on device being used
+        //Also adjust yPlacement
+        //Default - phone and others
+        var fontSize:CGFloat = 40
+        
+        //If they're using an ipad
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            fontSize = 65
+        }
+            //If they're using a tv...
+        else if UIDevice.current.userInterfaceIdiom == .tv {
+            fontSize = 200
+        }
+        
+        for word in words{
+            let label = UILabel()
+            label.backgroundColor = UIColor.white
+            label.text = word.text
+            label.font = UIFont(name: "HelveticaNeue", size: fontSize)
+            label.sizeToFit()
+            
+            label.center.x = CGFloat(word.centerX!)
+            label.center.y = CGFloat(word.centerY!)
+
+            //temp constraint to fix iphone placement
+            view.addSubview(label)
+            
+            label.isUserInteractionEnabled = true
+            let panGesture = UIPanGestureRecognizer(target: self, action: #selector(doPanGesture))
+            label.addGestureRecognizer(panGesture)
+        }
+    }
+    
+    @objc func doPanGesture(panGesture:UIPanGestureRecognizer) {
+        let label = panGesture.view as! UILabel
+        let position = panGesture.location(in: view)
+        label.center = position
+        
+    }
+
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showWordSegue"{
+            let wordSetVC = segue.destination.childViewControllers[0] as! WordSetVC
+            wordSetVC.title = "Choose a Word List"
+        }
     }
 
     @IBAction func unwindToMain(segue: UIStoryboardSegue) {
@@ -211,7 +207,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         picker.dismiss(animated: true, completion: nil)
     }
     
-    
+    @objc func applicationWillResignActive(_ application: UIApplication){
+        wordSetBrain.updateLabelPosistions(labels: findLabels())
+    }
 }
 
 extension ViewController: WordSetBrainDelegate {

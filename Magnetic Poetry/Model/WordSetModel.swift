@@ -2,12 +2,15 @@
 //  WordSetModel.swift
 //  Word River
 //
-//  Created by IrvinTehDo on 3/5/18.
+//  Created by Irvin Do and Kyle Lekkas on 3/5/18.
 //  Copyright © 2018 Irvin Do. All rights reserved.
+//
 //
 
 import Foundation
 import UIKit
+
+//Stubs which will need to be eventually fulfiled to have a working model
 protocol WordSetModel{
     var wordSets:[(name: String, value: [String])] { get set }
     var userSetDataArray:[UserSetData] {get set}
@@ -26,6 +29,7 @@ let kWordSetKey = "kWordSetKey"
 let kUserSetKey = "kUserSetKey"
 let kCategoryKey = "kCategoryKey"
 
+//Word sets will never change, also default category.
 struct Constants{
     struct WordSetModel {
         static let defaultWordSets:[(name: String, value: [String])] = [(name: "Default",value: [" a ", " a ", " & " , " & ", "about", "above", "ache", "am", "am", "and", "and", "because", "but", "for", "if", "he", "or", "he", "she", "they", " I ", "you", "me", "them", "exciting", "green", "tidy", "jump", "stop", "explore", "snow", "happen", "happen", "be", "evolve", "shrink", "widen", "man", "girl",   "engine", "horse", "wall", "flower", "life", "death"]), (name: "Pirates", value: [" a ", " a ", " a ", "aye", "aye", "avast ye", "ask", "Davey Jones", "chest", "barnacle", "fortune", "treasure", " & ", "thirsty", "this", "this", "shiver", "me", "me", "timbers", "pirate", "plank", "pirate", " I ", " I ", "sword", "plank", "secret", "search", "matey", "avast", "scurvy", "locker", "plank", "plunder", "gold", "feed", "fight", "walk the", "shoot", "swing"]), (name: "Space", value: ["rocket", "laser", "spaceship", "UFO", "alien", "galaxy", "planet", " a ", " a ", " a ", " & ",  " & ", " I ", " I ", "earth", "moon", "black", "abyss", "void", "hole", "asteroid", "comet", "meteor", "cold", "gravity", "zero", "boots", "suit", "space", "space", "lasers", "blaster", "fuel", "gravity", "pulls", "me"])]
@@ -51,8 +55,8 @@ class WordSetModelUserDefaults: WordSetModel {
         load()
     }
     
-    
-    //this is for you irvin I love you 
+
+    // To create the labels, space them out, then store them for later use when we finally place them.
     func setAndAppend(words: [(String)]) {
         userSetDataArray = []
         var xPlacement = 80
@@ -93,18 +97,20 @@ class WordSetModelUserDefaults: WordSetModel {
 
             let y = yPlacement
             label.center = CGPoint(x:x, y:y)
-            
+  
+            // Make and append a UserSetData object into the array with the text and center posistions.
             if ( y <= Int(UIScreen.main.bounds.height / 3)  ) {
                 userSetDataArray.append(UserSetData(text: label.text!, centerX: Int(label.center.x), centerY: Int(label.center.y)))
             }
         }
     }
     
+    // Create an archive so we can save it to UserDefaults.
     func makeUserSetArchive(userSetData: [UserSetData]) -> NSData{
         return NSKeyedArchiver.archivedData(withRootObject: userSetData as NSArray) as NSData
     }
     
-    
+    //Save our data
     func save() {
         let toSave = makeUserSetArchive(userSetData: userSetDataArray)
         defaults.set(toSave, forKey: kUserSetKey)
@@ -112,6 +118,7 @@ class WordSetModelUserDefaults: WordSetModel {
         defaults.set(category, forKey: kCategoryKey)
     }
     
+    //Load our data
     func load() {
         self.wordSets = Constants.WordSetModel.defaultWordSets
 
@@ -121,7 +128,7 @@ class WordSetModelUserDefaults: WordSetModel {
             self.category = "Default"
         }
         
-
+        // Create and set the list to the category.
         for sets in wordSets {
             if sets.name == category {
                 setAndAppend(words: sets.value)
@@ -129,6 +136,7 @@ class WordSetModelUserDefaults: WordSetModel {
             }
         }
         
+        // We want to get the information of what the previous locations of our labels were, if they don't exist then that means we're starting from scratch aka default.
         if let userSetData = defaults.object(forKey: kUserSetKey) as? Data{
             self.userSetDataArray = (NSKeyedUnarchiver.unarchiveObject(with: userSetData as Data) as? [UserSetData])!
         } else {

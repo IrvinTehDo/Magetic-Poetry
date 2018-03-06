@@ -64,12 +64,12 @@
 		3F5A4B4920212BCC00DB517F /* Magnetic Poetry */ = {
 			isa = PBXGroup;
 			children = (
+				775A3B0E204EA8C200A465E1 /* View Controllers */,
+				775A3B0D204EA8AF00A465E1 /* Objects */,
 				775A3B06204DFE1900A465E1 /* Model */,
 				3FAB6CCD204CE4A2003D5639 /* Extensions */,
 				3F5A4B4A20212BCC00DB517F /* AppDelegate.swift */,
-				3F5A4B4C20212BCC00DB517F /* ViewController.swift */,
 				3F5A4B4E20212BCC00DB517F /* Main.storyboard */,
-				77610A80203BCE270050D768 /* WordSetVC.swift */,
 				3F5A4B5120212BCC00DB517F /* Assets.xcassets */,
 				3F5A4B5320212BCC00DB517F /* LaunchScreen.storyboard */,
 				3F5A4B5620212BCC00DB517F /* Info.plist */,
@@ -88,11 +88,27 @@
 		775A3B06204DFE1900A465E1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				775A3B0B204E472F00A465E1 /* UserSetData.swift */,
 				775A3B07204DFE3300A465E1 /* WordSetModel.swift */,
 				775A3B09204E048600A465E1 /* WordSetBrain.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		775A3B0D204EA8AF00A465E1 /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				775A3B0B204E472F00A465E1 /* UserSetData.swift */,
+			);
+			path = Objects;
+			sourceTree = "<group>";
+		};
+		775A3B0E204EA8C200A465E1 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				3F5A4B4C20212BCC00DB517F /* ViewController.swift */,
+				77610A80203BCE270050D768 /* WordSetVC.swift */,
+			);
+			path = "View Controllers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
