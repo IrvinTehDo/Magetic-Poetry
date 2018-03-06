@@ -11,6 +11,7 @@ import UIKit
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     var backgroundImage:UIImage?
+    var wordSetBrain: WordSetBrain!
     
     override var prefersStatusBarHidden: Bool {
         return true
@@ -20,7 +21,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        placeWords(words: [" a ", " a ", " & " , " & ", "about", "above", "ache", "am", "am", "and", "and", "because", "but", "for", "if", "he", "or", "he", "she", "they", " I ", "you", "me", "them", "exciting", "green", "tidy", "jump", "stop", "explore", "snow", "happen", "happen", "be", "evolve", "shrink", "widen", "man", "girl",   "engine", "horse", "wall", "flower", "life", "death"])
+        placeWords(words: wordSetBrain.userSetData)
         
         //same color as start screen
         view.backgroundColor = UIColor.init(red: 0.168, green: 0.541, blue: 0.560, alpha: 1.0)
@@ -38,11 +39,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     //Places and Creates Labels based on an array of words
-    func placeWords(words:[String]) {
-        var xPlacement = 80
-        var yPlacement = 50
-        var yBuffer = 50
-        let margin = 35
+    func placeWords(words:[(text: NSString, centerX: NSNumber, centerY: NSNumber)] ) {
         
         //Determine font size based on device being used
         //Also adjust yPlacement
@@ -53,32 +50,23 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         if UIDevice.current.userInterfaceIdiom == .pad {
             fontSize = 65
         }
-        //If they're using a tv...
+            //If they're using a tv...
         else if UIDevice.current.userInterfaceIdiom == .tv {
             fontSize = 200
         }
-        //yBuffer will space the words vertically to compensate for large fontSize
-        yBuffer = Int(fontSize) + 20
+        
         for word in words{
             let label = UILabel()
             label.backgroundColor = UIColor.white
-            label.text = word
+            label.text = word.text as String
             label.font = UIFont(name: "HelveticaNeue", size: fontSize)
             label.sizeToFit()
             
-            if label.frame.width + CGFloat(margin) + CGFloat(xPlacement) > view.frame.size.width {
-                xPlacement = 80
-                yPlacement += yBuffer
-            }
-            
-            let x = margin + Int(xPlacement)
-            xPlacement = x + Int(label.frame.width)
-            
-            let y = yPlacement
-            label.center = CGPoint(x:x, y:y)
-            
+            label.center.x = CGFloat(truncating: word.centerX)
+            label.center.y = CGFloat(truncating: word.centerY)
+
             //temp constraint to fix iphone placement
-            if ( yPlacement <= Int ( view.frame.height / 3 ) ) {
+            if ( CGFloat(truncating: word.centerY) <= view.frame.height / 3  ) {
                 view.addSubview(label)
             }
             
@@ -103,13 +91,60 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             wordSetVC.title = "Choose a Word List"
         }
     }
+    
+    func setAndAppend(wordSet: [String]) -> [(text: NSString, centerX: NSNumber, centerY: NSNumber)] {
+        var tempUserSet: [(text: NSString, centerX: NSNumber, centerY: NSNumber)] = []
+        
+        var xPlacement = 80
+        var yPlacement = 50
+        var yBuffer = 50
+        let margin = 35
+        
+        //Determine font size based on device being used
+        //Also adjust yPlacement
+        //Default - phone and others
+        var fontSize:CGFloat = 40
+        
+        //If they're using an ipad
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            fontSize = 65
+        }
+            //If they're using a tv...
+        else if UIDevice.current.userInterfaceIdiom == .tv {
+            fontSize = 200
+        }
+        //yBuffer will space the words vertically to compensate for large fontSize
+        yBuffer = Int(fontSize) + 20
+        
+        for words in wordSet {
+            let label = UILabel()
+            label.backgroundColor = UIColor.white
+            label.text = words
+            label.font = UIFont(name: "HelveticaNeue", size: fontSize)
+            label.sizeToFit()
+            
+            if label.frame.width + CGFloat(margin) + CGFloat(xPlacement) > UIScreen.main.bounds.width {
+                xPlacement = 80
+                yPlacement += yBuffer
+            }
+            
+            let x = margin + Int(xPlacement)
+            xPlacement = x + Int(label.frame.width)
+            
+            let y = yPlacement
+            label.center = CGPoint(x:x, y:y)
+            tempUserSet.append((words as NSString, label.center.x as NSNumber, label.center.y as NSNumber))
+        }
+        
+        return tempUserSet
+    }
 
     @IBAction func unwindToMain(segue: UIStoryboardSegue) {
         if (segue.identifier == "DoneTapped"){
             let wordSetVC = segue.source as! WordSetVC
-            let wordSet = wordSetVC.selectedWordSet
+            wordSetBrain.userSetData = setAndAppend(wordSet: wordSetVC.selectedWordSet)
             removeWords()
-            placeWords(words: wordSet!)
+            placeWords(words: wordSetBrain.userSetData)
         }
     }
     
@@ -158,5 +193,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     
+}
+
+extension ViewController: WordSetBrainDelegate {
+    func wordSetBrain(didChange wordSetBrain: WordSetBrain, userSet: [(text: NSString, centerX: NSNumber, centerY: NSNumber)] ) {
+        print("Setting new values for labels")
+        placeWords(words: userSet)
+    }
 }
 
