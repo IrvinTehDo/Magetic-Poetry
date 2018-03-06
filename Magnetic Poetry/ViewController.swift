@@ -21,7 +21,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        placeWords(words: wordSetBrain.userSetData)
+        placeWords(words: wordSetBrain.userSetDataArray)
         
         //same color as start screen
         view.backgroundColor = UIColor.init(red: 0.168, green: 0.541, blue: 0.560, alpha: 1.0)
@@ -39,7 +39,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     //Places and Creates Labels based on an array of words
-    func placeWords(words:[(text: NSString, centerX: NSNumber, centerY: NSNumber)] ) {
+    func placeWords(words:[UserSetData] ) {
         
         //Determine font size based on device being used
         //Also adjust yPlacement
@@ -58,15 +58,15 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         for word in words{
             let label = UILabel()
             label.backgroundColor = UIColor.white
-            label.text = word.text as String
+            label.text = word.text
             label.font = UIFont(name: "HelveticaNeue", size: fontSize)
             label.sizeToFit()
             
-            label.center.x = CGFloat(truncating: word.centerX)
-            label.center.y = CGFloat(truncating: word.centerY)
+            label.center.x = CGFloat(word.centerX!)
+            label.center.y = CGFloat(word.centerY!)
 
             //temp constraint to fix iphone placement
-            if ( CGFloat(truncating: word.centerY) <= view.frame.height / 3  ) {
+            if ( CGFloat(word.centerY!) <= view.frame.height / 3  ) {
                 view.addSubview(label)
             }
             
@@ -92,8 +92,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
     }
     
-    func setAndAppend(wordSet: [String]) -> [(text: NSString, centerX: NSNumber, centerY: NSNumber)] {
-        var tempUserSet: [(text: NSString, centerX: NSNumber, centerY: NSNumber)] = []
+    func setAndAppend(wordSet: [String]) -> [UserSetData] {
+        var tempUserSet: [UserSetData] = []
         
         var xPlacement = 80
         var yPlacement = 50
@@ -133,7 +133,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             
             let y = yPlacement
             label.center = CGPoint(x:x, y:y)
-            tempUserSet.append((words as NSString, label.center.x as NSNumber, label.center.y as NSNumber))
+            tempUserSet.append(UserSetData(text: label.text!, centerX: Int(label.center.x), centerY: Int(label.center.y)))
         }
         
         return tempUserSet
@@ -142,9 +142,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBAction func unwindToMain(segue: UIStoryboardSegue) {
         if (segue.identifier == "DoneTapped"){
             let wordSetVC = segue.source as! WordSetVC
-            wordSetBrain.userSetData = setAndAppend(wordSet: wordSetVC.selectedWordSet)
+            wordSetBrain.userSetDataArray = setAndAppend(wordSet: wordSetVC.selectedWordSet)
             removeWords()
-            placeWords(words: wordSetBrain.userSetData)
+            placeWords(words: wordSetBrain.userSetDataArray)
+            wordSetBrain.categoryString = wordSetVC.selectedCategory
         }
     }
     
@@ -196,7 +197,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 }
 
 extension ViewController: WordSetBrainDelegate {
-    func wordSetBrain(didChange wordSetBrain: WordSetBrain, userSet: [(text: NSString, centerX: NSNumber, centerY: NSNumber)] ) {
+    func wordSetBrain(didChange wordSetBrain: WordSetBrain, userSet: [UserSetData] ) {
         print("Setting new values for labels")
         placeWords(words: userSet)
     }

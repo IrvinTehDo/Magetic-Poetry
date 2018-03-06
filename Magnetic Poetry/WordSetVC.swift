@@ -19,6 +19,7 @@ class WordSetVC: UITableViewController {
     let spaceWords = ["rocket", "laser", "spaceship", "UFO", "alien", "galaxy", "planet", " a ", " a ", " a ", " & ",  " & ", " I ", " I ", "earth", "moon", "black", "abyss", "void", "hole", "asteroid", "comet", "meteor", "cold", "gravity", "zero", "boots", "suit", "space", "space", "lasers", "blaster", "fuel", "gravity", "pulls", "me"]
     
     var selectedWordSet:[String]!
+    var selectedCategory: String!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,6 +52,7 @@ class WordSetVC: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedWordSet = wordSets[indexPath.row].value
+        selectedCategory = wordSets[indexPath.row].name
     }
 
     @IBAction func cancelTapped(_ sender: Any) {

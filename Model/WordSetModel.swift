@@ -9,9 +9,9 @@
 import Foundation
 import UIKit
 protocol WordSetModel{
-//    var wordSets:[(name: String, value: [String])] { get set }
-//    var userSetData:[(text: NSString, centerX: NSNumber, centerY: NSNumber)] {get set}
-//    func setAndAppend(words: [(String)])
+    var wordSets:[(name: String, value: [String])] { get set }
+    var userSetDataArray:[UserSetData] {get set}
+    func setAndAppend(words: [(String)])
     var category: String { get set }
     
     func save()
@@ -22,8 +22,8 @@ protocol WordSetModel{
 
 // User Set is the current of words the user is working with holding the text and posistions.
 
-//let kWordSetKey = "kWordSetKey"
-//let kUserSetKey = "kUserSetKey"
+let kWordSetKey = "kWordSetKey"
+let kUserSetKey = "kUserSetKey"
 let kCategoryKey = "kCategoryKey"
 
 struct Constants{
@@ -38,92 +38,99 @@ class WordSetModelUserDefaults: WordSetModel {
     
     let defaults: UserDefaults
     
-    //var wordSets: [(name: String, value: [String])]
+    var wordSets: [(name: String, value: [String])]
     
-    //var userSetData: [(text: NSString, centerX: NSNumber, centerY: NSNumber)] = []
+    var userSetDataArray: [UserSetData] = []
     
     var category: String
     
     init(userDefaults: UserDefaults = UserDefaults.standard){
         defaults = userDefaults
-        //wordSets = Constants.WordSetModel.defaultWordSets
-        //setAndAppend(words: wordSets[0].value)
-        
+        wordSets = Constants.WordSetModel.defaultWordSets
         category = Constants.defaultCategory
-        
+        //setAndAppend(words: wordSets[0].value)
         load()
     }
     
+    
     //this is for you irvin I love you 
-//    func setAndAppend(words: [(String)]) {
-//        userSetData = []
-//        var xPlacement = 80
-//        var yPlacement = 50
-//        var yBuffer = 50
-//        let margin = 35
-//
-//        //Determine font size based on device being used
-//        //Also adjust yPlacement
-//        //Default - phone and others
-//        var fontSize:CGFloat = 40
-//
-//        //If they're using an ipad
-//        if UIDevice.current.userInterfaceIdiom == .pad {
-//            fontSize = 65
-//        }
-//            //If they're using a tv...
-//        else if UIDevice.current.userInterfaceIdiom == .tv {
-//            fontSize = 200
-//        }
-//        //yBuffer will space the words vertically to compensate for large fontSize
-//        yBuffer = Int(fontSize) + 20
-//
-//        for words in wordSets[0].value {
-//            let label = UILabel()
-//            label.backgroundColor = UIColor.white
-//            label.text = words
-//            label.font = UIFont(name: "HelveticaNeue", size: fontSize)
-//            label.sizeToFit()
-//
-//            if label.frame.width + CGFloat(margin) + CGFloat(xPlacement) > UIScreen.main.bounds.width {
-//                xPlacement = 80
-//                yPlacement += yBuffer
-//            }
-//
-//            let x = margin + Int(xPlacement)
-//            xPlacement = x + Int(label.frame.width)
-//
-//            let y = yPlacement
-//            label.center = CGPoint(x:x, y:y)
-//            userSetData.append((words as NSString, label.center.x as NSNumber, label.center.y as NSNumber))
-//        }
-//    }
+    func setAndAppend(words: [(String)]) {
+        userSetDataArray = []
+        var xPlacement = 80
+        var yPlacement = 50
+        var yBuffer = 50
+        let margin = 35
+
+        //Determine font size based on device being used
+        //Also adjust yPlacement
+        //Default - phone and others
+        var fontSize:CGFloat = 40
+
+        //If they're using an ipad
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            fontSize = 65
+        }
+            //If they're using a tv...
+        else if UIDevice.current.userInterfaceIdiom == .tv {
+            fontSize = 200
+        }
+        //yBuffer will space the words vertically to compensate for large fontSize
+        yBuffer = Int(fontSize) + 20
+
+        for words in wordSets[0].value {
+            let label = UILabel()
+            label.backgroundColor = UIColor.white
+            label.text = words
+            label.font = UIFont(name: "HelveticaNeue", size: fontSize)
+            label.sizeToFit()
+
+            if label.frame.width + CGFloat(margin) + CGFloat(xPlacement) > UIScreen.main.bounds.width {
+                xPlacement = 80
+                yPlacement += yBuffer
+            }
+
+            let x = margin + Int(xPlacement)
+            xPlacement = x + Int(label.frame.width)
+
+            let y = yPlacement
+            label.center = CGPoint(x:x, y:y)
+            userSetDataArray.append(UserSetData(text: label.text!, centerX: Int(label.center.x), centerY: Int(label.center.y)))
+        }
+    }
+    
+    func makeUserSetArchive(userSetData: [UserSetData]) -> NSData{
+        return NSKeyedArchiver.archivedData(withRootObject: userSetData as NSArray) as NSData
+    }
+    
     
     func save() {
-        //defaults.set(wordSets, forKey: kWordSetKey)
-        
-        //let toSave = NSKeyedArchiver.archivedData(withRootObject: userSetData as NSArray) as NSData
+//        let toSave = makeUserSetArchive(userSetData: userSetDataArray)
+//        defaults.set(toSave, forKey: kUserSetKey)
         
         defaults.set(category, forKey: kCategoryKey)
     }
     
     func load() {
-//        if let wordSets = defaults.value(forKey: kWordSetKey) as? [(name: String, value: [String])]{
-//            self.wordSets = wordSets
-//        } else {
-//            self.wordSets = Constants.WordSetModel.defaultWordSets
-//        }
-        
-//        if let userSetData = defaults.value(forKey: kUserSetKey) as? Data{
-//            self.userSetData = (NSKeyedUnarchiver.unarchiveObject(with: userSetData as Data) as? [(text: NSString, centerX: NSNumber, centerY: NSNumber)])!
+        self.wordSets = Constants.WordSetModel.defaultWordSets
+        //setAndAppend(words: wordSets[0].value)
+//        if let userSetData = defaults.object(forKey: kUserSetKey) as? Data{
+//            self.userSetDataArray = (NSKeyedUnarchiver.unarchiveObject(with: userSetData as Data) as? [UserSetData])!
 //        } else {
 //            setAndAppend(words: wordSets[0].value)
 //        }
-        
+//
         if let category = defaults.value(forKey: kCategoryKey) as? String {
             self.category = category
         } else {
             self.category = "Default"
+        }
+        
+
+        for sets in wordSets {
+            if (sets.name == category) {
+                setAndAppend(words: sets.value)
+                break;
+            }
         }
     }
 }

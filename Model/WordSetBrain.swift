@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 protocol WordSetBrainDelegate{
-    func wordSetBrain(didChange wordSetBrain: WordSetBrain, userSet: [(text: NSString, centerX: NSNumber, centerY: NSNumber)] )
+    func wordSetBrain(didChange wordSetBrain: WordSetBrain, userSet: [UserSetData] )
 }
 
 class WordSetBrain {
@@ -22,21 +22,24 @@ class WordSetBrain {
         get {
             //never nil, no need to check
                 return dataModel.category
+        } set {
+            print("Setting new Category Value \(newValue)")
+            dataModel.category = newValue
         }
     }
 
-//    var userSetData: [(text: NSString, centerX: NSNumber, centerY: NSNumber)] {
-//        get {
-//            return dataModel.userSetData
-//        }
-//
-//        set {
-//            print("Setting New Value")
-//            dataModel.userSetData = newValue
-//            delegate?.wordSetBrain(didChange: self, userSet: newValue)
-//
-//        }
-//    }
+    var userSetDataArray: [UserSetData] {
+        get {
+            return dataModel.userSetDataArray
+        }
+
+        set {
+            print("Setting New Value")
+            dataModel.userSetDataArray = newValue
+            delegate?.wordSetBrain(didChange: self, userSet: newValue)
+
+        }
+    }
     
     init(dataModel: WordSetModel = WordSetModelUserDefaults()) {
         self.dataModel = dataModel

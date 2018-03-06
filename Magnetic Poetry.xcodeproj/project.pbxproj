@@ -15,6 +15,7 @@
 		3FAB6CCF204CE4C2003D5639 /* UIView+takeSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAB6CCE204CE4C2003D5639 /* UIView+takeSnapshot.swift */; };
 		775A3B08204DFE3300A465E1 /* WordSetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775A3B07204DFE3300A465E1 /* WordSetModel.swift */; };
 		775A3B0A204E048600A465E1 /* WordSetBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775A3B09204E048600A465E1 /* WordSetBrain.swift */; };
+		775A3B0C204E472F00A465E1 /* UserSetData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775A3B0B204E472F00A465E1 /* UserSetData.swift */; };
 		77610A81203BCE270050D768 /* WordSetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77610A80203BCE270050D768 /* WordSetVC.swift */; };
 /* End PBXBuildFile section */
 
@@ -29,6 +30,7 @@
 		3FAB6CCE204CE4C2003D5639 /* UIView+takeSnapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+takeSnapshot.swift"; sourceTree = "<group>"; };
 		775A3B07204DFE3300A465E1 /* WordSetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordSetModel.swift; sourceTree = "<group>"; };
 		775A3B09204E048600A465E1 /* WordSetBrain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordSetBrain.swift; sourceTree = "<group>"; };
+		775A3B0B204E472F00A465E1 /* UserSetData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSetData.swift; sourceTree = "<group>"; };
 		77610A80203BCE270050D768 /* WordSetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordSetVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -86,6 +88,7 @@
 		775A3B06204DFE1900A465E1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				775A3B0B204E472F00A465E1 /* UserSetData.swift */,
 				775A3B07204DFE3300A465E1 /* WordSetModel.swift */,
 				775A3B09204E048600A465E1 /* WordSetBrain.swift */,
 			);
@@ -166,6 +169,7 @@
 			files = (
 				3F5A4B4D20212BCC00DB517F /* ViewController.swift in Sources */,
 				775A3B0A204E048600A465E1 /* WordSetBrain.swift in Sources */,
+				775A3B0C204E472F00A465E1 /* UserSetData.swift in Sources */,
 				775A3B08204DFE3300A465E1 /* WordSetModel.swift in Sources */,
 				3FAB6CCF204CE4C2003D5639 /* UIView+takeSnapshot.swift in Sources */,
 				3F5A4B4B20212BCC00DB517F /* AppDelegate.swift in Sources */,

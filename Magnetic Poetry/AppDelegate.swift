@@ -50,7 +50,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 
 extension AppDelegate: WordSetBrainDelegate {
-    func wordSetBrain(didChange wordSetBrain: WordSetBrain, userSet: [(text: NSString, centerX: NSNumber, centerY: NSNumber)] ) {
+    func wordSetBrain(didChange wordSetBrain: WordSetBrain, userSet: [UserSetData] ) {
         print("New Set of Labels Added")
         
     }
