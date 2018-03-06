@@ -18,18 +18,25 @@ class WordSetBrain {
     
     var delegate: WordSetBrainDelegate?
     
-    var userSetData: [(text: NSString, centerX: NSNumber, centerY: NSNumber)] {
+    var categoryString: String {
         get {
-            return dataModel.userSetData
-        }
-        
-        set {
-            print("Setting New Value")
-            dataModel.userSetData = newValue
-            delegate?.wordSetBrain(didChange: self, userSet: newValue)
-            
+            //never nil, no need to check
+                return dataModel.category
         }
     }
+
+//    var userSetData: [(text: NSString, centerX: NSNumber, centerY: NSNumber)] {
+//        get {
+//            return dataModel.userSetData
+//        }
+//
+//        set {
+//            print("Setting New Value")
+//            dataModel.userSetData = newValue
+//            delegate?.wordSetBrain(didChange: self, userSet: newValue)
+//
+//        }
+//    }
     
     init(dataModel: WordSetModel = WordSetModelUserDefaults()) {
         self.dataModel = dataModel
