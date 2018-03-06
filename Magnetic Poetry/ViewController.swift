@@ -170,11 +170,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     //Load new background from photos
     @IBAction func loadPressed(_ sender: AnyObject) {
         let imagePickerController = UIImagePickerController()
-//        if UIImagePickerController.isSourceTypeAvailable(.camera){
-//            imagePickerController.sourceType = .camera
-//        } else {
-//            imagePickerController.sourceType = .savedPhotosAlbum
-//        }
         imagePickerController.delegate = self
         imagePickerController.allowsEditing = true
         self.present(imagePickerController, animated: true, completion: nil)

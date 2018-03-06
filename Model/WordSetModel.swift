@@ -48,7 +48,6 @@ class WordSetModelUserDefaults: WordSetModel {
         defaults = userDefaults
         wordSets = Constants.WordSetModel.defaultWordSets
         category = Constants.defaultCategory
-        //setAndAppend(words: wordSets[0].value)
         load()
     }
     
@@ -77,7 +76,7 @@ class WordSetModelUserDefaults: WordSetModel {
         //yBuffer will space the words vertically to compensate for large fontSize
         yBuffer = Int(fontSize) + 20
 
-        for words in wordSets[0].value {
+        for words in words {
             let label = UILabel()
             label.backgroundColor = UIColor.white
             label.text = words
@@ -127,7 +126,7 @@ class WordSetModelUserDefaults: WordSetModel {
         
 
         for sets in wordSets {
-            if (sets.name == category) {
+            if sets.name == category {
                 setAndAppend(words: sets.value)
                 break;
             }
