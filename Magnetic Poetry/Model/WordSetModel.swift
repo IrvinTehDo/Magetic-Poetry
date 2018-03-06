@@ -93,7 +93,10 @@ class WordSetModelUserDefaults: WordSetModel {
 
             let y = yPlacement
             label.center = CGPoint(x:x, y:y)
-            userSetDataArray.append(UserSetData(text: label.text!, centerX: Int(label.center.x), centerY: Int(label.center.y)))
+            
+            if ( y <= Int(UIScreen.main.bounds.height / 3)  ) {
+                userSetDataArray.append(UserSetData(text: label.text!, centerX: Int(label.center.x), centerY: Int(label.center.y)))
+            }
         }
     }
     
@@ -103,21 +106,15 @@ class WordSetModelUserDefaults: WordSetModel {
     
     
     func save() {
-//        let toSave = makeUserSetArchive(userSetData: userSetDataArray)
-//        defaults.set(toSave, forKey: kUserSetKey)
+        let toSave = makeUserSetArchive(userSetData: userSetDataArray)
+        defaults.set(toSave, forKey: kUserSetKey)
         
         defaults.set(category, forKey: kCategoryKey)
     }
     
     func load() {
         self.wordSets = Constants.WordSetModel.defaultWordSets
-        //setAndAppend(words: wordSets[0].value)
-//        if let userSetData = defaults.object(forKey: kUserSetKey) as? Data{
-//            self.userSetDataArray = (NSKeyedUnarchiver.unarchiveObject(with: userSetData as Data) as? [UserSetData])!
-//        } else {
-//            setAndAppend(words: wordSets[0].value)
-//        }
-//
+
         if let category = defaults.value(forKey: kCategoryKey) as? String {
             self.category = category
         } else {
@@ -130,6 +127,12 @@ class WordSetModelUserDefaults: WordSetModel {
                 setAndAppend(words: sets.value)
                 break;
             }
+        }
+        
+        if let userSetData = defaults.object(forKey: kUserSetKey) as? Data{
+            self.userSetDataArray = (NSKeyedUnarchiver.unarchiveObject(with: userSetData as Data) as? [UserSetData])!
+        } else {
+            setAndAppend(words: wordSets[0].value)
         }
     }
 }

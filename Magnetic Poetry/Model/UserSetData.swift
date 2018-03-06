@@ -26,8 +26,8 @@ class UserSetData: NSObject, NSCoding {
     
     required init(coder decoder: NSCoder) {
         text = decoder.decodeObject(forKey: kTextKey) as? String
-        centerX = decoder.decodeInteger(forKey: kCenterXKey)
-        centerY = decoder.decodeInteger(forKey: kCenterYKey)
+        centerX = (decoder.decodeObject(forKey: kCenterXKey) as! Int)
+        centerY = (decoder.decodeObject(forKey: kCenterYKey) as! Int)
     }
     
     func encode(with encoder: NSCoder) {

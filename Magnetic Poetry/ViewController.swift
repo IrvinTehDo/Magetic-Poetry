@@ -25,8 +25,30 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         //same color as start screen
         view.backgroundColor = UIColor.init(red: 0.168, green: 0.541, blue: 0.560, alpha: 1.0)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationWillResignActive(_:)), name: NSNotification.Name.UIApplicationWillResignActive, object: nil)
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    @objc func applicationWillResignActive(_ application: UIApplication){
+        wordSetBrain.updateLabelPosistions(labels: findLabels())
+    }
+    
+    func findLabels() -> [UILabel] {
+        var labels = [UILabel]()
+        
+        for view in view.subviews{
+            if (view is UILabel){
+                labels += [view as! UILabel]
+            }
+        }
+
+        
+        return labels
+    }
 
     
     //Removes every label from view
@@ -66,16 +88,15 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             label.center.y = CGFloat(word.centerY!)
 
             //temp constraint to fix iphone placement
-            if ( CGFloat(word.centerY!) <= view.frame.height / 3  ) {
-                view.addSubview(label)
-            }
-            
+            view.addSubview(label)
             
             label.isUserInteractionEnabled = true
             let panGesture = UIPanGestureRecognizer(target: self, action: #selector(doPanGesture))
             label.addGestureRecognizer(panGesture)
         }
     }
+    
+    
     
     @objc func doPanGesture(panGesture:UIPanGestureRecognizer) {
         let label = panGesture.view as! UILabel
@@ -133,7 +154,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             
             let y = yPlacement
             label.center = CGPoint(x:x, y:y)
-            tempUserSet.append(UserSetData(text: label.text!, centerX: Int(label.center.x), centerY: Int(label.center.y)))
+            if ( y <= Int(view.frame.height / 3)  ) {
+                tempUserSet.append(UserSetData(text: label.text!, centerX: Int(label.center.x), centerY: Int(label.center.y)))
+            }
         }
         
         return tempUserSet

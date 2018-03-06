@@ -48,7 +48,6 @@
 		3F5A4B3E20212BCC00DB517F = {
 			isa = PBXGroup;
 			children = (
-				775A3B06204DFE1900A465E1 /* Model */,
 				3F5A4B4920212BCC00DB517F /* Magnetic Poetry */,
 				3F5A4B4820212BCC00DB517F /* Products */,
 			);
@@ -65,6 +64,7 @@
 		3F5A4B4920212BCC00DB517F /* Magnetic Poetry */ = {
 			isa = PBXGroup;
 			children = (
+				775A3B06204DFE1900A465E1 /* Model */,
 				3FAB6CCD204CE4A2003D5639 /* Extensions */,
 				3F5A4B4A20212BCC00DB517F /* AppDelegate.swift */,
 				3F5A4B4C20212BCC00DB517F /* ViewController.swift */,

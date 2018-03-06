@@ -47,6 +47,16 @@ class WordSetBrain {
         NotificationCenter.default.addObserver(self, selector: #selector(applicationDidEnterBackground(_:)), name: NSNotification.Name.UIApplicationDidEnterBackground, object: nil)
     }
     
+    func updateLabelPosistions(labels: [UILabel]) {
+        for i in 0...(labels.count - 1) {
+            print(i)
+            print(labels[i].center.x)
+            print(labels[i].center.y)
+            dataModel.userSetDataArray[i].centerX = Int(labels[i].center.x)
+            dataModel.userSetDataArray[i].centerY = Int(labels[i].center.y)
+        }
+    }
+    
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
